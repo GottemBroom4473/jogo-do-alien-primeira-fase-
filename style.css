@@ -1,0 +1,84 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: vollkorn;
+  src: url(./assets/Vollkorn-Bold.ttf);
+}
+
+canvas {
+  display: block;
+}
+
+.gameTitle{
+  width: 75%;
+  height: 80px;
+}
+
+.greeting{
+  font-size: 45px;
+  color: rgb(0, 0, 0);
+  font-family: vollkorn;
+  text-align: center;
+}
+
+.customInput {
+  width:400px;
+  height:60px;
+  border: 3px solid white;
+  border-radius: 5px;
+  padding: 5px;
+  background-color:transparent;
+  font-size: 40px;
+  outline:none;
+  color:white;
+  font-family: vollkorn;
+  text-align: center;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.5; /* Firefox */
+}
+
+.customButton {
+  width:180*2px;
+  height:100px;
+  background-color: #fea834;
+  border: 6px solid white;
+  color: #FFFF;
+  font-weight:bold;
+  border-radius: 20px;
+  margin-bottom:200px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+  font-family: vollkorn;
+  margin: 8px 4px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  outline: none;
+}
+
+.leadersText{
+   font-size: 40px;
+   color: rgb(0, 0, 0);
+   font-family:vollkorn;
+   text-align: center; 
+  }
+
+  .resetText{
+  font-size: 25px;
+   color: rgb(0, 0, 0);
+   font-family: vollkorn;
+   text-align: center;
+   text-shadow: -1px 1px 0 #ffffff,
+   1px 1px 0 #ffffff,
+   1px -1px 0 #ffffff,
+  -1px -1px 0 #ffffff; 
+}
