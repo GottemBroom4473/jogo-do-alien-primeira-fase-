@@ -6,7 +6,7 @@ html, body {
 
 @font-face {
   font-family: vollkorn;
-  src: url(./assets/Vollkorn-Bold.ttf);
+  src: url(0Vollkorn-Bold.ttf);
 }
 
 canvas {
@@ -19,8 +19,8 @@ canvas {
 }
 
 .greeting{
-  font-size: 45px;
-  color: rgb(0, 0, 0);
+  font-size: 75px;
+  color: rgb(255, 255, 255);
   font-family: vollkorn;
   text-align: center;
 }
@@ -47,7 +47,7 @@ canvas {
 .customButton {
   width:180*2px;
   height:100px;
-  background-color: #fea834;
+  background-color: #000000;
   border: 6px solid white;
   color: #FFFF;
   font-weight:bold;

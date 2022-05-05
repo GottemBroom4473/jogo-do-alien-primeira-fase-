@@ -13,20 +13,22 @@ class Form {
   arrumarPos(){
     this.input.position(width/2-225,height/2-100);
     this.playButton.position(width/2-100,height/2);
-    this.title.position(width/2 -800,height/2-500);
-    this.greeting.position(width/2-200,height/2-100);
+    this.title.position(width/2-300 ,height/2-300);
+    this.greeting.position(width/2-300,height/2-100);
   }
   estilo(){
     this.playButton.class("customButton");
     this.input.class("customInput");
     this.greeting.class("greeting");
+    this.title.class("greeting");
     this.title.html(" ALIEN ATTACK ");
+
   }
   mouse(){
     this.playButton.mousePressed(()=>{
       this.input.hide();
       this.playButton.hide();
-      var mensagem = "ESPERANDO O OUTRO JOGADOR...";
+      var mensagem = "ESPERANDO PARCEIRO...";
       this.greeting.html(mensagem);
       playerCount = playerCount + 1;
       player.nome = this.input.value();
@@ -39,5 +41,6 @@ class Form {
     this.input.hide();
     this.playButton.hide();
     this.greeting.hide();
+    this.title.hide();
   }
 }

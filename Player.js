@@ -4,12 +4,8 @@ class Player {
   this.classificate = null; 
 
   this.positionX = 0;
-  this.positionY = 0;
 
-  this.combustivel = 200;
-  this.pontuacao = 0;
-
-  this.ranking = 0; 
+  this.pontuacao = 0; 
 
   this.vida = 100;
   }
@@ -25,6 +21,7 @@ var playerIndex = "jogadores/jogador"+this.classificate;
 
 if(this.classificate == 1){
 this.positionX = width/3 + 10;
+
 }
 else{
   this.positionX = width/2 + 300;
@@ -33,8 +30,6 @@ else{
 database.ref(playerIndex).set({
   nome: this.nome,
   positionX: this.positionX,
-  positionY: this.positionY,
-  combustivel: this.combustivel,
   pontuacao: this.pontuacao,
   vida: this.vida
 });
@@ -49,18 +44,10 @@ database.ref(playerIndex).set({
     var jogue = "jogadores/jogador" + this.classificate;
     database.ref(jogue).update({
       positionX: this.positionX,
-      positionY: this.positionY,
       pontuacao: this.pontuacao,
-      combustivel: this.combustivel,
       vida: this.vida
     })
   }
-  getRanking(){
-    var rank = database.ref("ranking");
-rank.on("value",data =>{this.ranking = data.val()})
-  }
-  updateRanking(count){
-    database.ref("/").update({ranking:count})
-  }
+  
 }
 
