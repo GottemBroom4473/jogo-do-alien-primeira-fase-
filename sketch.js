@@ -10,7 +10,7 @@ var database;
 var form;
 var player;
 var grupoNaves = [];
-var grupoInimigo = new Group();
+var grupoInimigo;
 
 
 function preload(){

@@ -24,21 +24,18 @@ class Game {
   this.resetBut.position(width-250,height -100);
   this.jogador1.position(400,550);
   this.jogador2.position(400,500);
-  this.tabela.position(200,600);
+  this.tabela.position(width/2-100,height -150);
   }
   estilo(){
     this.resetBut.class("customButton");
     this.tabela.class("resetText");
-    this.jogador1.class("leadersText");
-    this.jogador2.class("leadersText");
   }
   mouse(){
     this.resetBut.mousePressed(()=>{
       database.ref("/").set({
         gameState:0,
         playerCount:0,
-        jogadores:{},
-        ranking: 0
+        jogadores:{}
       });
       window.location.reload();
     });
@@ -50,7 +47,8 @@ class Game {
   //fazer pegar o valor atualizado do gameState
   }
 
-  start(){
+start(){
+  grupoInimigo = new Group();
   form = new Form();
   form.display();
 
@@ -58,15 +56,60 @@ class Game {
 
   jogador1 = createSprite(500, 500, 50, 50);
   jogador1.addImage(naveJogador1);
-  jogador1.scale = 0.3;
+  jogador1.scale = 0.4;
   jogador2 = createSprite(700, 500, 50,50)
   jogador2.addImage(naveJogador2);
-  jogador2.scale = 0.6;
+  jogador2.scale = 0.7;
   grupoNaves = [jogador1,jogador2];
 
 
   playerCount = player.getCount();
 
+  var posicoes = [
+    {
+      x:windowWidth - 50,
+      y:200
+    },
+    {
+      x:width/2-200,
+      y:200
+    },
+    {
+      x:width/2-350,
+      y:200
+    },
+    {
+      x:width/2-500,
+      y:200
+    },
+    {
+      x:width/2+150,
+      y:200
+    },
+    {
+      x:width/2+300,
+      y:200
+    },{
+      x:width/2+450,
+      y:200
+    },
+    {
+      x:width/+600,
+      y:200
+    },
+    {
+      x:width/2,
+      y:200
+    },
+    {
+      x:width/2+750,
+      y:200
+    },
+  ];
+
+  this.criarInimigos(grupoInimigo,10,imgAlien,0.2,posicoes);
+
+  
 }
 
 fase1(){
@@ -78,7 +121,16 @@ Player.getplayerInfo();
   for(var i in allPlayers){
     var x = allPlayers[i].positionX;
     grupoNaves[indice].position.x = x;
+    var y = allPlayers[i].positionY;
+    grupoNaves[indice].position.y = y;
     indice++;
+
+    if(indice == player.classificate){
+if(keyDown("space")){
+var tiros = createSprite(grupoNaves[indice].position.x, grupoNaves[indice].position.y, 5,10);
+tiros.shapeColor = "red";
+}
+    }
   }
 
 
@@ -112,11 +164,11 @@ Player.getplayerInfo();
     
   }
 
-  criarInimigos(group,number,image,scale){
+  criarInimigos(group,number,image,scale,posicoes = []){
     for(var a = 0;a < number;a++){
-
-  var x = Math.round(random(691,1376));
-  var y = Math.round(random(-height*5,height*6));
+var x = posicoes[a].x;
+var y = posicoes[a].y;
+    
 
   var objeto = createSprite(x,y);
   objeto.addImage(image);
