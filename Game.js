@@ -121,16 +121,26 @@ Player.getplayerInfo();
   for(var i in allPlayers){
     var x = allPlayers[i].positionX;
     grupoNaves[indice].position.x = x;
-    var y = allPlayers[i].positionY;
-    grupoNaves[indice].position.y = y;
     indice++;
 
-    if(indice == player.classificate){
-if(keyDown("space")){
-var tiros = createSprite(grupoNaves[indice].position.x, grupoNaves[indice].position.y, 5,10);
-tiros.shapeColor = "red";
-}
+   if(indice == player.classificate){
+
+    if(player.classificate==1){
+      if(keyDown("space")){
+      var tiros = createSprite(x, 500, 5,10);
+      tiros.shapeColor = "red";
+      tiros.velocityY = -2;
+      }
     }
+    if(player.classificate==2){
+    if(keyDown("space")){
+      var tiros = createSprite(x, 550, 5,10);
+      tiros.shapeColor = "red";
+      tiros.velocityY = -2;
+      
+      }
+  }
+  }
   }
 
 
