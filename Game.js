@@ -16,19 +16,24 @@ class Game {
 
   }
   funcaoA(){
-    var jogadores = Object.values(allPlayers);
-    this.jogador1.html(jogadores[0].nome + " :" + jogadores[0].pontuacao);
-    this.jogador2.html(jogadores[1].nome + " :" + jogadores[1].pontuacao);
+    if(allPlayers != undefined){
+      var jogadores = Object.values(allPlayers);
+      var zeroUm = jogadores[0].pontuacao + jogadores[1].pontuacao;
+      this.jogador1.html(zeroUm);
+  
+     console.log(jogadores[0].pontuacao);
+    }
+    
   }
   arrumarPos(){
   this.resetBut.position(width-250,height -100);
-  this.jogador1.position(400,550);
-  this.jogador2.position(400,500);
+  this.jogador1.position(width/2+150,height - 150);
   this.tabela.position(width/2-100,height -150);
   }
   estilo(){
     this.resetBut.class("customButton");
     this.tabela.class("resetText");
+    this.jogador1.class("resetText");
   }
   mouse(){
     this.resetBut.mousePressed(()=>{
@@ -49,8 +54,10 @@ class Game {
 
 start(){
   grupoInimigo = new Group();
+  grupoTiros = new Group();
   form = new Form();
   form.display();
+
 
   player = new Player();
 
@@ -116,6 +123,8 @@ fase1(){
   form.hide();
 
 Player.getplayerInfo();
+this.funcaoA();
+this.testeFase2();
 
   var indice = 0;
   for(var i in allPlayers){
@@ -124,22 +133,30 @@ Player.getplayerInfo();
     indice++;
 
    if(indice == player.classificate){
-
+if(grupoTiros){
+this.destroiAliens();
+}
     if(player.classificate==1){
       if(keyDown("space")){
-      var tiros = createSprite(x, 500, 5,10);
+      if(frameCount % 10 == 0){
+        var tiros = createSprite(x, 500, 5,10);
       tiros.shapeColor = "red";
-      tiros.velocityY = -2;
+      tiros.velocityY = -4;
+      grupoTiros.add(tiros);
       }
+    }
     }
     if(player.classificate==2){
     if(keyDown("space")){
+      if(frameCount % 10 == 0){
       var tiros = createSprite(x, 550, 5,10);
       tiros.shapeColor = "red";
-      tiros.velocityY = -2;
-      
+      tiros.velocityY = -4;
+      grupoTiros.add(tiros);
       }
+    }
   }
+
   }
   }
 
@@ -192,6 +209,19 @@ image(imgVida,400,-player.positionY,60,60);
 rect(400,-player.positionY-100,40,player.vida);
 }
 
+destroiAliens(){
+  grupoTiros.overlap(grupoInimigo, function(collector,collected){
+    collected.remove();
+    player.pontuacao += 5;
+    player.update();
+    contador += 1;
+  });
+}
+testeFase2(){
+if(contador > 9){
+gameState = 2;
 
+}
+};
 
 }

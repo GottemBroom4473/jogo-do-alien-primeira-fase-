@@ -11,6 +11,8 @@ var form;
 var player;
 var grupoNaves = [];
 var grupoInimigo;
+var grupoTiros;
+var contador = 0;
 
 
 function preload(){
@@ -38,6 +40,9 @@ function draw() {
       if(gameState == 1){
     game.fase1();
     game.display();
+      }
+      if(gameState == 2){
+    game.updateGame(2);
       }
   //drawSprites();
 }
