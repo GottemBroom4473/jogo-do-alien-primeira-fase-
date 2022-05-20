@@ -20,7 +20,9 @@ class Game {
       var jogadores = Object.values(allPlayers);
       var zeroUm = jogadores[0].pontuacao + jogadores[1].pontuacao;
       this.jogador1.html(zeroUm);
-  
+  if(zeroUm >= 35){
+gameState = 2;
+  }
      console.log(jogadores[0].pontuacao);
     }
     
@@ -40,6 +42,7 @@ class Game {
       database.ref("/").set({
         gameState:0,
         playerCount:0,
+        inimigos:{},
         jogadores:{}
       });
       window.location.reload();
@@ -60,6 +63,7 @@ start(){
 
 
   player = new Player();
+  inimigo = new Inimigos();
 
   jogador1 = createSprite(500, 500, 50, 50);
   jogador1.addImage(naveJogador1);
@@ -74,7 +78,11 @@ start(){
 
   var posicoes = [
     {
-      x:windowWidth - 50,
+      x:width/2 + 750,
+      y:200
+    },
+    {
+      x:windowWidth -100,
       y:200
     },
     {
@@ -86,30 +94,26 @@ start(){
       y:200
     },
     {
-      x:width/2-500,
+      x:width/2 -500,
       y:200
     },
     {
       x:width/2+150,
       y:200
-    },
-    {
+    },{
       x:width/2+300,
       y:200
-    },{
+    },
+    {
       x:width/2+450,
       y:200
     },
     {
-      x:width/+600,
+      x:width/2 + 600,
       y:200
     },
     {
       x:width/2,
-      y:200
-    },
-    {
-      x:width/2+750,
       y:200
     },
   ];
@@ -123,10 +127,19 @@ fase1(){
   form.hide();
 
 Player.getplayerInfo();
+Inimigos.getInimigoInfo();
 this.funcaoA();
-this.testeFase2();
 
-  var indice = 0;
+
+  var ymdyze = 0;
+  for(var i in allInimigos){
+    if(grupoInimigo[ymdyze]){
+      var x = allInimigos[i].positionX;
+      grupoInimigo[ymdyze].position.x = x;
+      ymdyze++;
+    }
+  }
+    var indice = 0;
   for(var i in allPlayers){
     var x = allPlayers[i].positionX;
     grupoNaves[indice].position.x = x;
@@ -214,14 +227,104 @@ destroiAliens(){
     collected.remove();
     player.pontuacao += 5;
     player.update();
-    contador += 1;
+
+    if(collected.position.x == width/2 + 750 ){
+inimigo.classificate = 0;
+inimigo.positionX = width * 2;
+inimigo.updateInimigo();
+    }
+    if(collected.position.x == windowWidth -100 ){
+      inimigo.classificate = 1;
+      inimigo.positionX = width * 2;
+      inimigo.updateInimigo();
+          }
+          if(collected.position.x == width/2 -200 ){
+            inimigo.classificate = 2;
+            inimigo.positionX = width * 2;
+            inimigo.updateInimigo();
+                }
+                if(collected.position.x == width/2 -350 ){
+                  inimigo.classificate = 3;
+                  inimigo.positionX = width * 2;
+                  inimigo.updateInimigo();
+                      }
+                      if(collected.position.x == width/2 - 500 ){
+                        inimigo.classificate = 4;
+                        inimigo.positionX = width * 2;
+                        inimigo.updateInimigo();
+                            }
+                            if(collected.position.x == width/2 + 150 ){
+                              inimigo.classificate = 5;
+                              inimigo.positionX = width * 2;
+                              inimigo.updateInimigo();
+                                  }
+                                  if(collected.position.x == width/2 + 300 ){
+                                    inimigo.classificate = 6;
+                                    inimigo.positionX = width * 2;
+                                    inimigo.updateInimigo();
+                                        }
+                                        if(collected.position.x == width/2 + 450 ){
+                                          inimigo.classificate = 7;
+                                          inimigo.positionX = width * 2;
+                                          inimigo.updateInimigo();
+                                              }
+                                              if(collected.position.x == width/2 + 600 ){
+                                                inimigo.classificate = 8;
+                                                inimigo.positionX = width * 2;
+                                                inimigo.updateInimigo();
+                                                    }
+                                                    if(collected.position.x == width/2 ){
+                                                      inimigo.classificate = 9;
+                                                      inimigo.positionX = width * 2;
+                                                      inimigo.updateInimigo();
+                                                          }
   });
+  
 }
-testeFase2(){
-if(contador > 9){
-gameState = 2;
+fase2(){
+  var posicoes = [
+    {
+      x:width/2 + 750,
+      y:200
+    },
+    {
+      x:windowWidth -100,
+      y:200
+    },
+    {
+      x:width/2-200,
+      y:200
+    },
+    {
+      x:width/2-350,
+      y:200
+    },
+    {
+      x:width/2 -500,
+      y:200
+    },
+    {
+      x:width/2+150,
+      y:200
+    },{
+      x:width/2+300,
+      y:200
+    },
+    {
+      x:width/2+450,
+      y:200
+    },
+    {
+      x:width/2 + 600,
+      y:200
+    },
+    {
+      x:width/2,
+      y:200
+    },
+  ];
 
+  this.criarInimigos(grupoInimigo,10,imgNaveAlien,0.4,posicoes);
+  drawSprites();
 }
-};
-
 }

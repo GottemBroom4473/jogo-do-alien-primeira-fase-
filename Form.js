@@ -31,6 +31,10 @@ class Form {
       var mensagem = "ESPERANDO PARCEIRO...";
       this.greeting.html(mensagem);
       playerCount = playerCount + 1;
+      for(var h = 0;h < 10; h++){
+      inimigo.classificate = h;
+      inimigo.addInimigo();
+      }
       player.nome = this.input.value();
       player.classificate = playerCount;
       player.addPlayer();
