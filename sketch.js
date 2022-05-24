@@ -1,4 +1,4 @@
-var fundoFase1, fundoFase2,fundoFase3;
+var fundoFase1, fundoFase2,fundoFase3,fundoFim;
 var allPlayers;
 var naveJogador1,naveJogador2;
 var jogador1,jogador2;
@@ -14,12 +14,14 @@ var grupoInimigo;
 var grupoTiros;
 var contador = 0;
 var allInimigos;
-var inimigo;
+var inimigo,inimigo2;
+var flag = 0;
 
 function preload(){
 fundoFase1 = loadImage("805197.jpg");
 fundoFase2 = loadImage("931599.jpg");
 fundoFase3 = loadImage("2868.jpg");
+fundoFim = loadImage("245.jpg");
 naveJogador1 = loadImage("nave1.png");
 naveJogador2 = loadImage("nave2.png");
 imgAlien = loadImage("alien.png");
@@ -54,6 +56,11 @@ background(fundoFase1);
     background(fundoFase3);
     game.fase2();
     game.updateGame(2);
+      }
+      if(gameState == 3){
+    background(fundoFim);
+    game.updateGame(3);
+    game.fim();
       }
   //drawSprites();
 }

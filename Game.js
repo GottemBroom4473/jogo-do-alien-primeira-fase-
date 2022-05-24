@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.resetBut = createButton("REINICIAR");
-
+    this.fimTxt = createElement("h1");
     this.tabela = createElement("h2");
     this.jogador1 = createElement("h2");
     this.jogador2 = createElement("h2");
@@ -20,8 +20,11 @@ class Game {
       var jogadores = Object.values(allPlayers);
       var zeroUm = jogadores[0].pontuacao + jogadores[1].pontuacao;
       this.jogador1.html(zeroUm);
-  if(zeroUm >= 35){
+  if(zeroUm >= 40){
 gameState = 2;
+  }
+  if(zeroUm >= 100){
+gameState = 3;
   }
      console.log(jogadores[0].pontuacao);
     }
@@ -32,10 +35,16 @@ gameState = 2;
   this.jogador1.position(width/2+150,height - 150);
   this.tabela.position(width/2-100,height -150);
   }
+  arrumarPos2(){
+    this.fimTxt.position(width/2-300 ,height/2-300);
+    this.estilo();
+    this.fimTxt.html("VOCE SALVOU A GALAXIA, PARABENS");
+  }
   estilo(){
     this.resetBut.class("customButton");
     this.tabela.class("resetText");
     this.jogador1.class("resetText");
+    this.fimTxt.class("greeting");
   }
   mouse(){
     this.resetBut.mousePressed(()=>{
@@ -282,49 +291,69 @@ inimigo.updateInimigo();
   
 }
 fase2(){
-  var posicoes = [
-    {
-      x:width/2 + 750,
-      y:200
-    },
-    {
-      x:windowWidth -100,
-      y:200
-    },
-    {
-      x:width/2-200,
-      y:200
-    },
-    {
-      x:width/2-350,
-      y:200
-    },
-    {
-      x:width/2 -500,
-      y:200
-    },
-    {
-      x:width/2+150,
-      y:200
-    },{
-      x:width/2+300,
-      y:200
-    },
-    {
-      x:width/2+450,
-      y:200
-    },
-    {
-      x:width/2 + 600,
-      y:200
-    },
-    {
-      x:width/2,
-      y:200
-    },
-  ];
-
-  this.criarInimigos(grupoInimigo,10,imgNaveAlien,0.4,posicoes);
+  Player.getplayerInfo();
+    Inimigos.getInimigoInfo();
+  if(flag == 0){
+    inimigo2 = new Inimigos2();
+    for(var h = 0;h < 10; h++){
+      inimigo2.classificate = h;
+      inimigo2.addInimigo();
+      }
+    var posicoes = [
+      {
+        x:width/2 + 750,
+        y:200
+      },
+      {
+        x:windowWidth -100,
+        y:200
+      },
+      {
+        x:width/2-200,
+        y:200
+      },
+      {
+        x:width/2-350,
+        y:200
+      },
+      {
+        x:width/2 -500,
+        y:200
+      },
+      {
+        x:width/2+150,
+        y:200
+      },{
+        x:width/2+300,
+        y:200
+      },
+      {
+        x:width/2+450,
+        y:200
+      },
+      {
+        x:width/2 + 600,
+        y:200
+      },
+      {
+        x:width/2,
+        y:200
+      },
+    ];
+  
+  
+  
+    this.criarInimigos(grupoInimigo,10,imgNaveAlien,0.4,posicoes);
+    flag = 1;
+    console.log(grupoInimigo);
+    
+  }
+this.funcaoA();
+  console.log(flag);
   drawSprites();
+}
+
+fim(){
+this.arrumarPos2();  
 }
 }
