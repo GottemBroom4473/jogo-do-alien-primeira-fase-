@@ -26,7 +26,7 @@ gameState = 2;
   if(zeroUm >= 100){
 gameState = 3;
   }
-     console.log(jogadores[0].pontuacao);
+
     }
     
   }
@@ -66,6 +66,7 @@ gameState = 3;
 
 start(){
   grupoInimigo = new Group();
+  grupoInimigo2 = new Group();
   grupoTiros = new Group();
   form = new Form();
   form.display();
@@ -233,7 +234,6 @@ rect(400,-player.positionY-100,40,player.vida);
 
 destroiAliens(){
   grupoTiros.overlap(grupoInimigo, function(collector,collected){
-    collected.remove();
     player.pontuacao += 5;
     player.update();
 
@@ -290,15 +290,75 @@ inimigo.updateInimigo();
   });
   
 }
+destroiAliens2(){
+  grupoTiros.overlap(grupoInimigo2, function(collector,collected){
+    player.pontuacao += 5;
+    player.update();
+
+    if(collected.position.x == width/2 + 750 ){
+inimigo2.classificate = 0;
+inimigo2.positionX = width * 2;
+inimigo2.updateInimigo();
+    }
+    if(collected.position.x == windowWidth -100 ){
+      inimigo2.classificate = 1;
+      inimigo2.positionX = width * 2;
+      inimigo2.updateInimigo();
+          }
+          if(collected.position.x == width/2 -200 ){
+            inimigo2.classificate = 2;
+            inimigo2.positionX = width * 2;
+            inimigo2.updateInimigo();
+                }
+                if(collected.position.x == width/2 -350 ){
+                  inimigo2.classificate = 3;
+                  inimigo2.positionX = width * 2;
+                  inimigo2.updateInimigo();
+                      }
+                      if(collected.position.x == width/2 - 500 ){
+                        inimigo2.classificate = 4;
+                        inimigo2.positionX = width * 2;
+                        inimigo2.updateInimigo();
+                            }
+                            if(collected.position.x == width/2 + 150 ){
+                              inimigo2.classificate = 5;
+                              inimigo2.positionX = width * 2;
+                              inimigo2.updateInimigo();
+                                  }
+                                  if(collected.position.x == width/2 + 300 ){
+                                    inimigo2.classificate = 6;
+                                    inimigo2.positionX = width * 2;
+                                    inimigo2.updateInimigo();
+                                        }
+                                        if(collected.position.x == width/2 + 450 ){
+                                          inimigo2.classificate = 7;
+                                          inimigo2.positionX = width * 2;
+                                          inimigo2.updateInimigo();
+                                              }
+                                              if(collected.position.x == width/2 + 600 ){
+                                                inimigo2.classificate = 8;
+                                                inimigo2.positionX = width * 2;
+                                                inimigo2.updateInimigo();
+                                                    }
+                                                    if(collected.position.x == width/2 ){
+                                                      inimigo2.classificate = 9;
+                                                      inimigo2.positionX = width * 2;
+                                                      inimigo2.updateInimigo();
+                                                          }
+  });
+  
+}
 fase2(){
-  Player.getplayerInfo();
-    Inimigos.getInimigoInfo();
+  form.hide();
   if(flag == 0){
+    grupoInimigo.destroyEach();
+    grupoTiros.destroyEach();
     inimigo2 = new Inimigos2();
     for(var h = 0;h < 10; h++){
       inimigo2.classificate = h;
       inimigo2.addInimigo();
       }
+  
     var posicoes = [
       {
         x:width/2 + 750,
@@ -343,17 +403,59 @@ fase2(){
   
   
   
-    this.criarInimigos(grupoInimigo,10,imgNaveAlien,0.4,posicoes);
+    this.criarInimigos(grupoInimigo2,10,imgNaveAlien,0.4,posicoes);
     flag = 1;
-    console.log(grupoInimigo);
     
   }
+Player.getplayerInfo();
+Inimigos2.getInimigoInfo();
+this.moveNaves();
 this.funcaoA();
-  console.log(flag);
+var ymdyze = 0;
+for(var i in allInimigos2){
+  if(grupoInimigo2[ymdyze]){
+    var x = allInimigos2[i].positionX;
+    grupoInimigo2[ymdyze].position.x = x;
+    ymdyze++;
+  }
+}
+  var indice = 0;
+for(var i in allPlayers){
+  var x = allPlayers[i].positionX;
+  grupoNaves[indice].position.x = x;
+  indice++;
+
+ if(indice == player.classificate){
+if(grupoTiros){
+this.destroiAliens2();
+}
+  if(player.classificate==1){
+    if(keyDown("space")){
+    if(frameCount % 10 == 0){
+      var tiros = createSprite(x, 500, 5,10);
+    tiros.shapeColor = "red";
+    tiros.velocityY = -4;
+    grupoTiros.add(tiros);
+    }
+  }
+  }
+  if(player.classificate==2){
+  if(keyDown("space")){
+    if(frameCount % 10 == 0){
+    var tiros = createSprite(x, 550, 5,10);
+    tiros.shapeColor = "red";
+    tiros.velocityY = -4;
+    grupoTiros.add(tiros);
+    }
+  }
+}
+ }
+}
   drawSprites();
 }
 
 fim(){
-this.arrumarPos2();  
+this.arrumarPos2();
+this.funcaoA();  
 }
 }

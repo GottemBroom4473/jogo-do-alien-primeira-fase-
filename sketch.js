@@ -10,10 +10,10 @@ var database;
 var form;
 var player;
 var grupoNaves = [];
-var grupoInimigo;
+var grupoInimigo,grupoInimigo2;
 var grupoTiros;
 var contador = 0;
-var allInimigos;
+var allInimigos,allInimigos2;
 var inimigo,inimigo2;
 var flag = 0;
 
@@ -38,13 +38,13 @@ function setup() {
 
 function draw() {
    
-  if(playerCount == 2){
-    game.updateGame(1);
-    
-      }
+
       if(gameState == 0){
 background(fundoFase1);
-
+if(playerCount == 2){
+  game.updateGame(1);
+  
+    }
       }
 
       if(gameState == 1){
@@ -56,11 +56,13 @@ background(fundoFase1);
     background(fundoFase3);
     game.fase2();
     game.updateGame(2);
+    game.display();
       }
       if(gameState == 3){
     background(fundoFim);
     game.updateGame(3);
     game.fim();
+    game.display();
       }
   //drawSprites();
 }
